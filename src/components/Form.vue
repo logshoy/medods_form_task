@@ -3,23 +3,23 @@
     <h1>Form MEDDODS</h1>
      <form class="form" @submit.prevent="submitHandler">
         <div>
-          <label for="name">Имя*</label>
-          <input id="name" type="text" class="input" v-model.trim="name">
+          <label for="name">Имя<span class="star">*</span></label>
+          <input id="name" type="text" class="input" v-model.trim="name" placeholder="Имя">
           <small v-if="$v.name.$dirty && !$v.name.required"
           >Поле имя обязательное</small>
         </div>      
         <div>
-          <label for="surname">Фамилия*</label>
-          <input id="surname" type="text" class="input" v-model="surname">
+          <label for="surname">Фамилия<span class="star">*</span></label>
+          <input id="surname" type="text" class="input" v-model="surname" placeholder="Фамилия">
           <small v-if="$v.surname.$dirty && !$v.surname.required"
           >Поле Фамилия обязательное</small>
         </div>
         <div>
           <label id="patronymic">Отчество</label>
-          <input id="patronymic" type="text" class="input" v-model="patronymic">
+          <input id="patronymic" type="text" class="input" v-model="patronymic" placeholder="Отчество">
         </div>
         <div>
-          <label for="birthday">Дата рождения*</label>
+          <label for="birthday">Дата рождения<span class="star">*</span></label>
           <input id="birthday" type="date" class="input" v-model.number="birthday">
           <small v-if="$v.birthday.$dirty && !$v.birthday.required"
           >Поле Дата рождения обязательное</small>
@@ -30,14 +30,14 @@
           type="tel" 
           required 
           @input="filterInput"
-            placeholder="(555) 555-5555"
+            placeholder="+7(555) 555-5555"
             autocomplete="tel"
           class="input" 
           v-model.number="phone">
         </div>
         <div>
           <label>Пол</label>
-          <input type="text" class="input" v-model="gender">
+          <input type="text" class="input" v-model="gender" placeholder="Пол">
         </div>
         <div>
             <label for="groupClient">Группа клиентов</label>
@@ -70,29 +70,29 @@
         <h2>Адрес</h2>
         <div>
           <label for="index">Индекс</label>
-          <input id="index" type="text" class="input" v-model.number="index">
+          <input id="index" type="text" class="input" v-model.number="index" placeholder="Индекс">
         </div>
         <div>
           <label for="country">Страна</label>
-          <input id="country" type="text" class="input" v-model="country">
+          <input id="country" type="text" class="input" v-model="country" placeholder="Страна">
         </div>
         <div>
-          <label for="city">Город*</label>
-          <input id="city" type="text" class="input" v-model="city">
+          <label for="city">Город<span class="star">*</span></label>
+          <input id="city" type="text" class="input" v-model="city" placeholder="Город">
           <small v-if="$v.city.$dirty && !$v.city.required"
           >Поле город обязательное</small>
         </div>
         <div>
           <label for="street">Улица</label>
-          <input id="street" type="text" class="input" v-model="street">
+          <input id="street" type="text" class="input" v-model="street" placeholder="Улица">
         </div>
         <div>
           <label for="house">Дом</label>
-          <input id="house" type="text" class="input" v-model="house">
+          <input id="house" type="text" class="input" v-model="house" placeholder="Дом">
         </div>
         <h2>Паспорт</h2>
         <div>
-            <label for="passport">Тип документа*</label>
+            <label for="passport">Тип документа<span class="star">*</span></label>
             <select
                 id="passport"
                 v-model="passport"
@@ -105,7 +105,26 @@
             <small v-if="$v.passport.$dirty && !$v.passport.required"
           >Поле паспорт обязательное</small>
         </div>
+        <div>
+          <label for="series">Серия</label>
+          <input id="series" type="number" class="input" v-model.number="series" placeholder="Серия">
+        </div>
+        <div>
+          <label for="number">Номер</label>
+          <input id="number" type="number" class="input" v-model.number="number" placeholder="Номер">
+        </div>
+        <div>
+          <label for="issuedBy">Кем выдан</label>
+          <input id="issuedBy" type="text" class="input" v-model="issuedBy" placeholder="Кем выдан">
+        </div>
+        <div>
+          <label for="dateIssue">Дата выдачи<span class="star">*</span></label>
+          <input id="dateIssue" type="date" class="input" v-model.number="dateIssue" placeholder="Дата выдачи">
+          <small v-if="$v.dateIssue.$dirty && !$v.birthday.required"
+          >Поле Дата выдачи обязательное</small>
+        </div>
       <div>
+        <h3><span class="star">*</span>Поле обязательное для заполнения.</h3>
         <button type="submit" class="button">
           Отправить
         </button>
@@ -116,7 +135,6 @@
             <h3 slot="header">Клиент создан</h3>
             <button @click="modal = false">Закрыть</button>
         </div>
-        
     </div>
   </div>
 </template>
@@ -142,14 +160,19 @@ export default {
         city: '',
         street: '',
         house: '',
-        passport: ''
+        passport: '',
+        series: '',
+        number: '',
+        issuedBy: '',
+        dateIssue: '',
     }),
     validations: {
       name: { required },
       surname: { required }, 
       birthday: { required},
       city: { required },
-      passport: { required }
+      passport: { required },
+      dateIssue: { required }
   },
   methods: {
       filterInput(e) {
@@ -191,7 +214,7 @@ export default {
         margin: 10px auto;
         padding: 5px;
         width: 1000px;
-
+        background-color: #e5e5e5;
     }
 
     .form > div {
@@ -201,16 +224,19 @@ export default {
 
     .checkbox {
         flex-direction: row !important;
+        align-items: center;
     }
 
     .form label {
+      font-size: 20px;
+      font-weight: bold;
         text-align: left;
         margin-left: 5px;
         margin-top: 5px;
     }
 
     .form input {
-        height: 20px;
+        height: 30px;
         margin: 5px;
     }
 
@@ -222,6 +248,22 @@ export default {
         text-align: left;
         margin-left: 5px;
         color: red
+    }
+
+    .star {
+      color:red;
+    }
+
+    .button {
+      margin: 10px 50px;
+      height: 30px;
+      width: 300px;
+      border: 2px solid #000;
+      border-radius: 5px;;
+      cursor: pointer;
+      font-size: 16px;
+      color: red;
+      background-color:aquamarine;
     }
 
     .modal {
