@@ -7,7 +7,7 @@
           <label for="name">Имя<span class="star">*</span></label>
           <input id="name" type="text" v-model.trim="name" placeholder="Илья">
           <small v-if="$v.name.$dirty && !$v.name.required"
-          >Поле имя обязательное</small>
+            >Поле Имя обязательное</small>
         </div>      
         <div class="form__field">
           <label for="surname">Фамилия<span class="star">*</span></label>
@@ -113,7 +113,7 @@
                 <option>Вод. удостоверение</option>
             </select>
             <small v-if="$v.passport.$dirty && !$v.passport.required"
-          >Поле паспорт обязательное</small>
+          >Поле Тип документа обязательное</small>
         </div>
         <div class="row row--passport">
           <div class="form__field">
