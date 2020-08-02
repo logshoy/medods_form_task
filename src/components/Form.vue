@@ -2,19 +2,19 @@
     <div>
     <h1>Form MEDODS</h1>
      <form class="form" @submit.prevent="submitHandler">
-       <h2>Данные клиента</h2>
-        <div class="form__field">
-          <label for="name">Имя<span class="star">*</span></label>
-          <input id="name" type="text" v-model.trim="name" placeholder="Илья">
-          <small v-if="$v.name.$dirty && !$v.name.required"
-            >Поле Имя обязательное</small>
-        </div>      
+        <h2>Данные клиента</h2>
         <div class="form__field">
           <label for="surname">Фамилия<span class="star">*</span></label>
           <input id="surname" type="text" class="input" v-model="surname" placeholder="Маметьев">
           <small v-if="$v.surname.$dirty && !$v.surname.required"
           >Поле Фамилия обязательное</small>
         </div>
+        <div class="form__field">
+          <label for="name">Имя<span class="star">*</span></label>
+          <input id="name" type="text" v-model.trim="name" placeholder="Илья">
+          <small v-if="$v.name.$dirty && !$v.name.required"
+            >Поле Имя обязательное</small>
+        </div>      
         <div class="form__field">
           <label id="patronymic">Отчество</label>
           <input id="patronymic" type="text" class="input" v-model="patronymic" placeholder="Сергеевич">
@@ -38,8 +38,7 @@
           <select
                 id="gender"
                 v-model="gender"
-                name="gender"
-                >
+                name="gender">
                 <option>Мужской</option>
                 <option>Женский</option>
             </select>
@@ -75,20 +74,24 @@
         </div>
         <h2>Адрес</h2>
         <div class="row">
-        <div class="form__field form__field--index">
-          <label for="index">Индекс</label>
-          <input id="index" type="text" class="input" v-model.number="index" placeholder="123456">
+          <div class="form__field form__field--index">
+            <label for="index">Индекс</label>
+            <input id="index" type="text" class="input" v-model.number="index" placeholder="123456">
+          </div>
+          <div class="form__field form__field--country">
+            <label for="country">Страна</label>
+            <input id="country" type="text" class="input" v-model="country" placeholder="Российская Федерация">
+          </div>
         </div>
-        <div class="form__field form__field--country">
-          <label for="country">Страна</label>
-          <input id="country" type="text" class="input" v-model="country" placeholder="Российская Федерация">
-        </div>
+        <div class="form__field">
+          <label for="region">Область</label>
+          <input id="region" type="text" class="input" v-model="region" placeholder="Челябинская">
         </div>
         <div class="form__field">
           <label for="city">Город<span class="star">*</span></label>
           <input id="city" type="text" class="input" v-model="city" placeholder="Магнитогорск">
           <small v-if="$v.city.$dirty && !$v.city.required"
-          >Поле город обязательное</small>
+          >Поле Город обязательное</small>
         </div>
         <div class="row">
           <div class="form__field form__field--street">
@@ -175,6 +178,7 @@ export default {
         sms: false,
         index: '',
         country: '',
+        region: '',
         city: '',
         street: '',
         house: '',
@@ -208,24 +212,6 @@ export default {
             return;
           }
           this.modal = true
-          const formData = {
-            name: this.name,
-            surname: this.surname,
-            patronymic: this.patronymic,
-            birthday: this.birthday,
-            phone: this.phone,
-            gender: this.gender,
-            groupClient: this.groupClient,
-            doctor: this.doctor,
-            sms: this.sms,
-            index: this.index,
-            country: this.country,
-            city: this.city,
-            street: this.street,
-            house: this.house,
-            passport: this.passport
-          }
-          console.log(formData)
       }
   }
 
